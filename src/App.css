@@ -46,7 +46,7 @@ h1 { color: #DBFE87; text-align: center; }
   max-width: 10em;
   margin: 1em auto;
 }
-#square { 
+.square { 
   background: #03B5AA;
   width: 3em;
   height: 3em; 

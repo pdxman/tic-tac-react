@@ -28,35 +28,40 @@ export default function Board(){
         newSquares[i] = 'X';
         setSquares(newSquares)
         console.log(newSquares)
+
+        // if (newSquares[i] === 'X' ){
+        //     const squares = document.getElementsByClassName('square')
+        //     squares.classList.add('clicked')
+        // } 
       }
 
     return(
         <div className="board-flex">
-           <div id="square" onClick={() => handleClick(1)}>
+           <div className="square" onClick={() => handleClick(0)}>
+                <span id="move" className="user-move">{squares[0] === 'X' ? '0' : 'X'}</span>
+            </div>
+            <div className="square" onClick={() => handleClick(1)}>
                 <span id="move" className="user-move"></span>
             </div>
-            <div id="square" onClick={() => handleClick(2)}>
+            <div className="square" onClick={() => handleClick(2)}>
                 <span id="move" className="user-move"></span>
             </div>
-            <div id="square" onClick={() => handleClick(3)}>
+            <div className="square" onClick={() => handleClick(3)}>
                 <span id="move" className="user-move"></span>
             </div>
-            <div id="square" onClick={() => handleClick(4)}>
+            <div className="square" onClick={() => handleClick(4)}>
                 <span id="move" className="user-move"></span>
             </div>
-            <div id="square" onClick={() => handleClick(5)}>
+            <div className="square" onClick={() => handleClick(5)}>
                 <span id="move" className="user-move"></span>
             </div>
-            <div id="square" onClick={() => handleClick(6)}>
+            <div className="square" onClick={() => handleClick(6)}>
                 <span id="move" className="user-move"></span>
             </div>
-            <div id="square" onClick={() => handleClick(7)}>
+            <div className="square" onClick={() => handleClick(7)}>
                 <span id="move" className="user-move"></span>
             </div>
-            <div id="square" onClick={() => handleClick(8)}>
-                <span id="move" className="user-move"></span>
-            </div>
-            <div id="square" onClick={() => handleClick(9)}>
+            <div className="square" onClick={() => handleClick(8)}>
                 <span id="move" className="user-move"></span>
             </div>
             {/* <div>
