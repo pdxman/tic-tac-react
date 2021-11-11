@@ -1,70 +1,115 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Moves from './Moves'
 
-export default function Board(){
+export default function Board() {
+  // const [user, setUser] = useState(false)
+  // const [playerMoves, setPlayerMoves] = useState(Moves)
+  const [squares, setSquares] = useState(Array(9).fill(null))
 
-    // const [user, setUser] = useState(false)
-    // const [playerMoves, setPlayerMoves] = useState(Moves)
-    const [squares, setSquares] = useState(Array(9).fill(null))
+  useEffect(() => {
+    console.log(squares)
+  }, [squares])
 
-    // function handleClick(){
-    //     if(user){
-    //         document.getElementById('move').classList.add('show')
-    //     } else {
-    //         document.getElementById('move').classList.add('show')
-    //     }
-    // }
+  const CurrentPlayer = () => {
+    return <div>Current Player: {player}</div>
+  }
 
-    // function updateSquare() {
-    //     setPlayerMoves([
-    //         {...playerMoves[8],
-    //         ...playerMoves[8],
-    //         empty: false
-    //     }])
-    // }
+  const resetGame = () => {
+    setSquares(Array(9).fill(null))
+    setPlayer('X')
+  }
 
-    function handleClick(i) {
-        let newSquares = squares
-        newSquares[i] = 'X';
-        setSquares(newSquares)
-        console.log(newSquares)
+  const ResetGame = () => {
+    return (
+      <div>
+        <button onClick={() => resetGame()}>Reset</button>
+      </div>
+    )
+  }
 
-        // if (newSquares[i] === 'X' ){
-        //     const squares = document.getElementsByClassName('square')
-        //     squares.classList.add('clicked')
-        // } 
-      }
+  // function handleClick(){
+  //     if(user){
+  //         document.getElementById('move').classList.add('show')
+  //     } else {
+  //         document.getElementById('move').classList.add('show')
+  //     }
+  // }
 
-    return(
-        <div className="board-flex">
-           <div className="square" onClick={() => handleClick(0)}>
-                <span id="move" className="user-move">{squares[0] === 'X' ? '0' : 'X'}</span>
-            </div>
-            <div className="square" onClick={() => handleClick(1)}>
-                <span id="move" className="user-move"></span>
-            </div>
-            <div className="square" onClick={() => handleClick(2)}>
-                <span id="move" className="user-move"></span>
-            </div>
-            <div className="square" onClick={() => handleClick(3)}>
-                <span id="move" className="user-move"></span>
-            </div>
-            <div className="square" onClick={() => handleClick(4)}>
-                <span id="move" className="user-move"></span>
-            </div>
-            <div className="square" onClick={() => handleClick(5)}>
-                <span id="move" className="user-move"></span>
-            </div>
-            <div className="square" onClick={() => handleClick(6)}>
-                <span id="move" className="user-move"></span>
-            </div>
-            <div className="square" onClick={() => handleClick(7)}>
-                <span id="move" className="user-move"></span>
-            </div>
-            <div className="square" onClick={() => handleClick(8)}>
-                <span id="move" className="user-move"></span>
-            </div>
-            {/* <div>
+  // function updateSquare() {
+  //     setPlayerMoves([
+  //         {...playerMoves[8],
+  //         ...playerMoves[8],
+  //         empty: false
+  //     }])
+  // }
+
+  const [player, setPlayer] = useState('X')
+
+  const getNextPlayer = (player) => {
+    return player === 'X' ? setPlayer('O') : setPlayer('X')
+  }
+
+  function handleClick(i, player) {
+    if (squares[i] === null) {
+      let newSquares = squares
+      newSquares[i] = player
+      setSquares(newSquares)
+      getNextPlayer(player)
+    }
+    console.log(squares)
+  }
+
+  const renderSquare = (i, player) => {
+    return (
+      <div className='square' onClick={() => handleClick(i, player)}>
+        {squares[i]}
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <ResetGame />
+      <CurrentPlayer player={player} />
+      <div className='board-flex'>
+        {renderSquare(0, player)}
+        {renderSquare(1, player)}
+        {renderSquare(2, player)}
+        {renderSquare(3, player)}
+        {renderSquare(4, player)}
+        {renderSquare(5, player)}
+        {renderSquare(6, player)}
+        {renderSquare(7, player)}
+        {renderSquare(8, player)}
+        {/* <div className='square' onClick={() => handleClick(0, player)}>
+          {squares[0]}
+        </div>
+        <div className='square' onClick={() => handleClick(1, player)}>
+          {squares[1]}
+        </div>
+        <div className='square' onClick={() => handleClick(2, player)}>
+          {squares[2]}
+        </div>
+        <div className='square' onClick={() => handleClick(3, player)}>
+          <span id='move' className='user-move'></span>
+        </div>
+        <div className='square' onClick={() => handleClick(4, player)}>
+          <span id='move' className='user-move'></span>
+        </div>
+        <div className='square' onClick={() => handleClick(5, player)}>
+          <span id='move' className='user-move'></span>
+        </div>
+        <div className='square' onClick={() => handleClick(6, player)}>
+          <span id='move' className='user-move'></span>
+        </div>
+        <div className='square' onClick={() => handleClick(7, player)}>
+          <span id='move' className='user-move'></span>
+        </div>
+        <div className='square' onClick={() => handleClick(8, player)}>
+          <span id='move' className='user-move'></span>
+        </div> */}
+      </div>
+      {/* <div>
                 <ul className="board-flex">
                     {playerMoves.map(move => (
                             <li id="square" onClick={handleClick} style={{color:'#fff' }} >
@@ -74,6 +119,6 @@ export default function Board(){
                     )}
                 </ul>
             </div> */}
-        </div>
-    )
+    </div>
+  )
 }
