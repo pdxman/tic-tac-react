@@ -1,67 +1,118 @@
-import React, { useState } from 'react'
-import Moves from './Moves'
+import React, { useState, useEffect } from 'react'
 
-export default function Board(){
-    const [squares, setSquares] = useState(Array(9).fill(null))
-    const [player, setPlayer] = useState('X')
-    const [disabled, setDisabled] = useState(false)
-    //How do I get disabled to update my squares array?
+export default function Board() {
+  const [squares, setSquares] = useState(Array(9).fill(null))
+  const [player, setPlayer] = useState('X')
+  const [disabled, setDisabled] = useState(false)
+  const [winner, setWinner] = useState('')
 
-    const getNextPlayer = (player) => {
-        return player === 'X' ? setPlayer('0') : setPlayer('X')
-    }
+  useEffect(() => {
+    console.log(squares)
+    console.log(`disabled: ${disabled}`)
+    isWinner()
+  }, [squares, disabled])
 
-    const lockSquare = (disabled) => {
-        return disabled === true ? setDisabled(true) : setDisabled(false)
-        // is this the right track?
-    }
+  const CurrentPlayer = () => {
+    return <div>Current Player: {player}</div>
+  }
 
-    function handleClick(i, player, disabled) {
-        let newSquares = squares
-        newSquares[i] = player;
-        setSquares(newSquares)
-        getNextPlayer(player)
-        lockSquare(disabled)
-        let newNewSquares = newSquares
-        newNewSquares[i] = disabled
-        setSquares(newNewSquares)
-        getNextPlayer(player)
-        console.log('new new ', newNewSquares)
-        //how is "i" on newSquares connecting to array?
-        // do I need to add property/values to array and spread in(...newSquares)?
-    }
+  const resetGame = () => {
+    setSquares(Array(9).fill(null))
+    setPlayer('X')
+  }
 
-    
-
-    return(
-        <div className="board-flex">
-           <button className="square" disabled={disabled} onClick={() => handleClick(0, player)}>
-                <span id="move" className="user-move">{squares[0]}</span>
-            </button>
-            <button className="square" disabled={disabled} onClick={() => handleClick(1, player)}>
-                <span id="move" className="user-move">{squares[1]}</span>
-            </button>
-            <button className="square" disabled={disabled} onClick={() => handleClick(2, player)}>
-                <span id="move" className="user-move">{squares[2]}</span>
-            </button>
-            <button className="square" disabled={disabled} onClick={() => handleClick(3, player)}>
-                <span id="move" className="user-move">{squares[3]}</span>
-            </button>
-            <button className="square" disabled={disabled} onClick={() => handleClick(4, player)}>
-                <span id="move" className="user-move">{squares[4]}</span>
-            </button>
-            <button className="square" disabled={disabled} onClick={() => handleClick(5, player)}>
-                <span id="move" className="user-move">{squares[5]}</span>
-            </button>
-            <button className="square" disabled={disabled} onClick={() => handleClick(6, player)}>
-                <span id="move" className="user-move">{squares[6]}</span>
-            </button>
-            <button className="square" disabled={disabled} onClick={() => handleClick(7, player)}>
-                <span id="move" className="user-move">{squares[7]}</span>
-            </button>
-            <button className="square" disabled={disabled} onClick={() => handleClick(8, player)}>
-                <span id="move" className="user-move">{squares[8]}</span>
-            </button>
-        </div>
+  const ResetGame = () => {
+    setDisabled(false)
+    return (
+      <div>
+        <button onClick={() => resetGame()}>Reset</button>
+      </div>
     )
+  }
+
+  const getNextPlayer = (player) => {
+    return player === 'X' ? setPlayer('O') : setPlayer('X')
+  }
+
+  function handleClick(i, player) {
+    if (squares[i] === null) {
+      let newSquares = squares
+      newSquares[i] = player
+      setSquares(newSquares)
+      getNextPlayer(player)
+      isWinner()
+    }
+    console.log(squares)
+  }
+
+  const isWinner = () => {
+    if(squares[0], squares[1], squares[2] === "X" ){
+        setDisabled(true)
+        setWinner("X wins! Excellent!")
+        return <div>Winner</div>
+    } else if(squares[0], squares[1], squares[2] === "O" ){
+        setDisabled(true)
+        setWinner("0 wins! Excellent!")
+        return <div>Winner</div>
+    }
+    
+  }
+
+  const renderSquare = (i, player) => {
+    return (
+      <div
+        className='square'
+        disabled={disabled}
+        onClick={() => handleClick(i, player)}>
+        {squares[i]}
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <ResetGame />
+      <CurrentPlayer player={player} />
+      <div className='board-flex'>
+        {renderSquare(0, player)}
+        {renderSquare(1, player)}
+        {renderSquare(2, player)}
+        {renderSquare(3, player)}
+        {renderSquare(4, player)}
+        {renderSquare(5, player)}
+        {renderSquare(6, player)}
+        {renderSquare(7, player)}
+        {renderSquare(8, player)}
+        {/* <div className='square' onClick={() => handleClick(0, player)}>
+          {squares[0]}
+        </div>
+        <div className='square' onClick={() => handleClick(1, player)}>
+          {squares[1]}
+        </div>
+        <div className='square' onClick={() => handleClick(2, player)}>
+          {squares[2]}
+        </div>
+        <div className='square' onClick={() => handleClick(3, player)}>
+          <span id='move' className='user-move'></span>
+        </div>
+        <div className='square' onClick={() => handleClick(4, player)}>
+          <span id='move' className='user-move'></span>
+        </div>
+        <div className='square' onClick={() => handleClick(5, player)}>
+          <span id='move' className='user-move'></span>
+        </div>
+        <div className='square' onClick={() => handleClick(6, player)}>
+          <span id='move' className='user-move'></span>
+        </div>
+        <div className='square' onClick={() => handleClick(7, player)}>
+          <span id='move' className='user-move'></span>
+        </div>
+        <div className='square' onClick={() => handleClick(8, player)}>
+          <span id='move' className='user-move'></span>
+        </div> */}
+      </div>
+      <p>Winner: {winner}</p>
+    </div>
+  )
 }
+
