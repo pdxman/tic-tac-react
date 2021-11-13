@@ -61,7 +61,7 @@ h1 { color: #DBFE87; text-align: center; }
 
 .play-piece { color: #7A306C; font-size: 3em;}
 
-.user-move{ display: none; }
+/* .user-move{ display: none; } */
 .user-move.show { display: block; }
 
 /* .user-move:before{ content: 'X'; position: absolute; left: 0; top: 0; width: 2em; height: 2em;  } */
