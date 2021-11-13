@@ -5,17 +5,30 @@ export default function Board(){
     const [squares, setSquares] = useState(Array(9).fill(null))
     const [player, setPlayer] = useState('X')
     const [disabled, setDisabled] = useState(false)
+    //How do I get disabled to update my squares array?
 
     const getNextPlayer = (player) => {
         return player === 'X' ? setPlayer('0') : setPlayer('X')
     }
 
-    function handleClick(i, player) {
+    const lockSquare = (disabled) => {
+        return disabled === true ? setDisabled(true) : setDisabled(false)
+        // is this the right track?
+    }
+
+    function handleClick(i, player, disabled) {
         let newSquares = squares
         newSquares[i] = player;
         setSquares(newSquares)
         getNextPlayer(player)
-        setDisabled(true)
+        lockSquare(disabled)
+        let newNewSquares = newSquares
+        newNewSquares[i] = disabled
+        setSquares(newNewSquares)
+        getNextPlayer(player)
+        console.log('new new ', newNewSquares)
+        //how is "i" on newSquares connecting to array?
+        // do I need to add property/values to array and spread in(...newSquares)?
     }
 
     
