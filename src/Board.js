@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import Moves from './Moves'
 
 export default function Board() {
-  // const [user, setUser] = useState(false)
-  // const [playerMoves, setPlayerMoves] = useState(Moves)
   const [squares, setSquares] = useState(Array(9).fill(null))
+  const [player, setPlayer] = useState('X')
+  const [disabled, setDisabled] = useState(false)
 
   useEffect(() => {
     console.log(squares)
-  }, [squares])
+    console.log(`disabled: ${disabled}`)
+  }, [squares, disabled])
 
   const CurrentPlayer = () => {
     return <div>Current Player: {player}</div>
@@ -20,30 +20,13 @@ export default function Board() {
   }
 
   const ResetGame = () => {
+    setDisabled(false)
     return (
       <div>
         <button onClick={() => resetGame()}>Reset</button>
       </div>
     )
   }
-
-  // function handleClick(){
-  //     if(user){
-  //         document.getElementById('move').classList.add('show')
-  //     } else {
-  //         document.getElementById('move').classList.add('show')
-  //     }
-  // }
-
-  // function updateSquare() {
-  //     setPlayerMoves([
-  //         {...playerMoves[8],
-  //         ...playerMoves[8],
-  //         empty: false
-  //     }])
-  // }
-
-  const [player, setPlayer] = useState('X')
 
   const getNextPlayer = (player) => {
     return player === 'X' ? setPlayer('O') : setPlayer('X')
@@ -59,9 +42,18 @@ export default function Board() {
     console.log(squares)
   }
 
+  const isWinner = () => {
+    // More logic here
+    setDisabled(true)
+    return <div>Winner</div>
+  }
+
   const renderSquare = (i, player) => {
     return (
-      <div className='square' onClick={() => handleClick(i, player)}>
+      <div
+        className='square'
+        disabled={disabled}
+        onClick={() => handleClick(i, player)}>
         {squares[i]}
       </div>
     )
@@ -109,16 +101,6 @@ export default function Board() {
           <span id='move' className='user-move'></span>
         </div> */}
       </div>
-      {/* <div>
-                <ul className="board-flex">
-                    {playerMoves.map(move => (
-                            <li id="square" onClick={handleClick} style={{color:'#fff' }} >
-                                {move.player}, {move.computer}, {move.square}, {move.empty}
-                            </li>
-                        )
-                    )}
-                </ul>
-            </div> */}
     </div>
   )
 }
