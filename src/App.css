@@ -52,6 +52,7 @@ h1 { color: #DBFE87; text-align: center; }
   height: 3em; 
   border-radius: 4px;
   margin-bottom: .5em;
+  margin-right: .5em;
   display: flex;
   align-items: center;
   justify-content: center;
