@@ -54,6 +54,30 @@ export default function Board() {
         setDisabled(true)
         setWinner("0 wins! Excellent!")
         return <div>Winner</div>
+    } else if(squares[3], squares[4], squares[5] === "X" ){
+      setDisabled(true)
+      setWinner("X wins! Excellent!")
+      return <div>Winner</div>
+    } else if(squares[3], squares[4], squares[5] === "O" ){
+      setDisabled(true)
+      setWinner("0 wins! Excellent!")
+      return <div>Winner</div>
+    } else if(squares[6], squares[7], squares[8] === "X" ){
+      setDisabled(true)
+      setWinner("X wins! Excellent!")
+      return <div>Winner</div>
+    } else if(squares[6], squares[8], squares[8] === "O" ){
+      setDisabled(true)
+      setWinner("0 wins! Excellent!")
+      return <div>Winner</div>
+    } else if(squares[0], squares[4], squares[8] === "X" ){
+      setDisabled(true)
+      setWinner("X wins! Excellent!")
+      return <div>Winner</div>
+    } else if(squares[0], squares[4], squares[8] === "O" ){
+      setDisabled(true)
+      setWinner("0 wins! Excellent!")
+      return <div>Winner</div>
     }
     
   }
