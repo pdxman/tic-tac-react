@@ -9,7 +9,7 @@ export default function Board() {
   useEffect(() => {
     console.log(squares)
     console.log(`disabled: ${disabled}`)
-    isWinner()
+    isWinner(0,1,2)
   }, [squares, disabled])
 
   const CurrentPlayer = () => {
@@ -45,42 +45,45 @@ export default function Board() {
     console.log(squares)
   }
 
-  const isWinner = () => {
-    if(squares[0], squares[1], squares[2] === "X" ){
+  const isWinner = (placeOne, placeTwo, placeThree) => {
+    if(squares[placeOne], squares[placeTwo], squares[placeThree] === "X" ){
         setDisabled(true)
         setWinner("X wins! Excellent!")
         return <div>Winner</div>
-    } else if(squares[0], squares[1], squares[2] === "O" ){
+    } else if (squares[placeOne], squares[placeTwo], squares[placeThree] === "O" ){
         setDisabled(true)
         setWinner("0 wins! Excellent!")
         return <div>Winner</div>
-    } else if(squares[3], squares[4], squares[5] === "X" ){
-      setDisabled(true)
-      setWinner("X wins! Excellent!")
-      return <div>Winner</div>
-    } else if(squares[3], squares[4], squares[5] === "O" ){
-      setDisabled(true)
-      setWinner("0 wins! Excellent!")
-      return <div>Winner</div>
-    } else if(squares[6], squares[7], squares[8] === "X" ){
-      setDisabled(true)
-      setWinner("X wins! Excellent!")
-      return <div>Winner</div>
-    } else if(squares[6], squares[8], squares[8] === "O" ){
-      setDisabled(true)
-      setWinner("0 wins! Excellent!")
-      return <div>Winner</div>
-    } else if(squares[0], squares[4], squares[8] === "X" ){
-      setDisabled(true)
-      setWinner("X wins! Excellent!")
-      return <div>Winner</div>
-    } else if(squares[0], squares[4], squares[8] === "O" ){
-      setDisabled(true)
-      setWinner("0 wins! Excellent!")
-      return <div>Winner</div>
-    }
+    }    
+    // } else if(squares[3], squares[4], squares[5] === "X" ){
+    //   setDisabled(true)
+    //   setWinner("X wins! Excellent!")
+    //   return <div>Winner</div>
+    // } else if(squares[3], squares[4], squares[5] === "O" ){
+    //   setDisabled(true)
+    //   setWinner("0 wins! Excellent!")
+    //   return <div>Winner</div>
+    // } else if(squares[6], squares[7], squares[8] === "X" ){
+    //   setDisabled(true)
+    //   setWinner("X wins! Excellent!")
+    //   return <div>Winner</div>
+    // } else if(squares[6], squares[8], squares[8] === "O" ){
+    //   setDisabled(true)
+    //   setWinner("0 wins! Excellent!")
+    //   return <div>Winner</div>
+    // } else if(squares[0], squares[4], squares[8] === "X" ){
+    //   setDisabled(true)
+    //   setWinner("X wins! Excellent!")
+    //   return <div>Winner</div>
+    // } else if(squares[0], squares[4], squares[8] === "O" ){
+    //   setDisabled(true)
+    //   setWinner("0 wins! Excellent!")
+    //   return <div>Winner</div>
+    // }
     
   }
+
+  
 
   const renderSquare = (i, player) => {
     return (
