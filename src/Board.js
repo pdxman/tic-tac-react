@@ -9,7 +9,7 @@ export default function Board() {
   useEffect(() => {
     console.log(squares)
     console.log(`disabled: ${disabled}`)
-    isWinner(0,1,2)
+    
   }, [squares, disabled])
 
   const CurrentPlayer = () => {
@@ -40,7 +40,7 @@ export default function Board() {
       newSquares[i] = player
       setSquares(newSquares)
       getNextPlayer(player)
-      isWinner()
+      isWinner(0,1,2)//if statement here with all the options?
     }
     console.log(squares)
   }
